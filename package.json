@@ -1,0 +1,35 @@
+{
+  "name": "flux",
+  "version": "1.0.0",
+  "description": "My first flux app",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browserify": "^11.2.0",
+    "flux": "^2.1.1",
+    "gulp": "^3.9.0",
+    "httpster": "^1.0.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-router-component": "^0.27.1",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weface/flux.git"
+  },
+  "keywords": [
+    "React",
+    "Flux"
+  ],
+  "author": "Loan MYyers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weface/flux/issues"
+  },
+  "homepage": "https://github.com/weface/flux#readme"
+}

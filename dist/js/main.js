@@ -18978,7 +18978,7 @@ module.exports = require('./lib/React');
 var React = require('react');
 var App = React.createClass({displayName: "App",
 	render:function(){
-		return React.createElement("h1", null, "My App")
+		return React.createElement("h1", null, "My first flux App")
 	}
 });
 
