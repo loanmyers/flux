@@ -1,4 +1,4 @@
-var React = require('react');
+    var React = require('react');
 var AppStore = require('../actions/app-actions');
 var AddToCart = require('app-addtocart');
 
@@ -15,7 +15,7 @@ var Catalog = React.createClass({
             return (
                 <tr>
                     <td>{item.title}</td>
-                    <td>{item.cost}</td>
+                    <td>${item.cost}</td>
                     <td><AddToCart item = {item} /></td>
                 </tr>
             );

@@ -19312,12 +19312,9 @@ module.exports = AppActions;
 
 },{"../constants/app-constants":163,"../dispatchers/app-dispatcher":164}],162:[function(require,module,exports){
 var React = require('react');
-var AppActions = require('../actions/app-actions');
+var Catalog = require('../actions/app-actions');
 
 var App = React.createClass({displayName: "App",
-	handler: function(){
-        AppActions.addItem('this is axx item');
-	},
 	render:function(){
 		return React.createElement("h1", {onClick: this.handler}, "My second attempt flux App")
 	}

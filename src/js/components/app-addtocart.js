@@ -1,6 +1,7 @@
 var React = require('react');
 var AppActions = require('../actions/app-actions');
 
+
 var AddToCart = React.createClass({
     handler : function(){
         AppActions.increaseItem(this.props.item)
