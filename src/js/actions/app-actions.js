@@ -3,7 +3,6 @@ var AppDispatcher = require('../dispatchers/app-dispatcher');
 
 var AppActions = {
 	addItem: function(item){
-        AppDispatcher.handleViewAction()
 		AppDispatcher.handleViewAction({
             actionType: AppConstants.ADD_ITEM,
             item: item })
@@ -26,6 +25,6 @@ var AppActions = {
             index: index
 		})
 	}
-}
+};
 
 module.exports = AppActions;

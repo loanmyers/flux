@@ -19586,7 +19586,6 @@ var AppDispatcher = require('../dispatchers/app-dispatcher');
 
 var AppActions = {
 	addItem: function(item){
-        AppDispatcher.handleViewAction()
 		AppDispatcher.handleViewAction({
             actionType: AppConstants.ADD_ITEM,
             item: item })
@@ -19609,7 +19608,7 @@ var AppActions = {
             index: index
 		})
 	}
-}
+};
 
 module.exports = AppActions;
 
@@ -19620,7 +19619,7 @@ var AppActions = require('../actions/app-actions');
 
 var AddToCart = React.createClass({displayName: "AddToCart",
     handler : function(){
-        AppActions.increaseItem(this.props.item)
+        AppActions.addItem(this.props.item)
     },
     render : function(){
         return React.createElement("button", {onClick: this.handler}, "Add to cart")
