@@ -1,6 +1,6 @@
-    var React = require('react');
-var AppStore = require('../actions/app-actions');
-var AddToCart = require('app-addtocart');
+var React = require('react');
+var AppStore = require('../stores/app-stores');
+var AddToCart = require('./app-addtocart');
 
 function getCatalog(){
     return { items : AppStore.getCatalog()}
@@ -13,7 +13,7 @@ var Catalog = React.createClass({
     render : function () {
         var items = this.state.items.map(function(item){
             return (
-                <tr>
+                <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>${item.cost}</td>
                     <td><AddToCart item = {item} /></td>
@@ -22,7 +22,7 @@ var Catalog = React.createClass({
         })
         return (
             <table className="table table-hover">
-                {items}
+                <tbody>{items}</tbody>
             </table>
         )
     }

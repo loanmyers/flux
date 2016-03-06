@@ -1,7 +1,7 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher');
 var AppConstants = require('../constants/app-constants');
 var assign = require('react/lib/Object.assign');
-var EventEmitter = require('events'),EventEmitter;
+var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = 'change';
 var _catalog = [];
@@ -69,15 +69,15 @@ var AppStore = assign(EventEmitter.prototype, {
     },
 
     addRemoveListener: function (callback) {
-        this.remomveListener(CHANGE_EVENT, callback)
+        this.removeListener(CHANGE_EVENT, callback)
     },
     getCart: function(){
         return _cartItems
     },
-    getCatalog: function () {
+    getCatalog: function (){
         return _catalog
     },
-    getCartTotals: function () {
+    getCartTotals: function (){
         return _cartTotals
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
