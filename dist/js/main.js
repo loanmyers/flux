@@ -19664,7 +19664,7 @@ var Cart  = React.createClass({displayName: "Cart",
                         React.createElement(IncreaseItem, {index: i}), 
                         React.createElement(DecreaseItem, {index: i})
                     ), 
-                    React.createElement("td", null, subtotal)
+                    React.createElement("td", null, "$", subtotal)
                 )
             );
         })
@@ -19685,7 +19685,7 @@ var Cart  = React.createClass({displayName: "Cart",
                 React.createElement("tfoot", null, 
                     React.createElement("tr", null, 
                         React.createElement("td", null, "Total"), 
-                        React.createElement("td", null, total)
+                        React.createElement("td", null, "$", total)
                     )
                 )
             )
