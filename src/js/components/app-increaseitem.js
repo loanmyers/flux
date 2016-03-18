@@ -10,4 +10,4 @@ var IncreaseItem = React.createClass({
     }
 });
 
-modules.exports = IncreaseItem;
+module.exports = IncreaseItem;
