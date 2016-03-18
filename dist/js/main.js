@@ -19668,10 +19668,13 @@ var Catalog = require('./app-catalog');
 var App = React.createClass({displayName: "App",
 	render : function(){
 		return (
-        React.createElement("div", null, 
-            React.createElement("h1", null, "Shopping"), 
-            React.createElement(Catalog, null)
-        )
+            React.createElement("div", null, 
+                React.createElement("h1", null, "Shopping"), 
+                React.createElement(Catalog, null), 
+                React.createElement("p", null, "Cart"), 
+                React.createElement("h1", null, "xfasdf"), 
+                React.createElement(Cart, null)
+            )
         );
 	}
 });

@@ -7,9 +7,9 @@ var App = React.createClass({
             <div>
                 <h1>Shopping</h1>
                 <Catalog />
-            </div>
-            <div>
-                <h1>Cart</h1>
+                <p>Cart</p>
+                <h1>xfasdf</h1>
+                <Cart />
             </div>
         );
 	}
