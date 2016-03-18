@@ -19612,7 +19612,7 @@ var AppActions = {
 
 module.exports = AppActions;
 
-},{"../constants/app-constants":166,"../dispatchers/app-dispatcher":167}],163:[function(require,module,exports){
+},{"../constants/app-constants":170,"../dispatchers/app-dispatcher":171}],163:[function(require,module,exports){
 var React = require('react');
 var AppActions = require('../actions/app-actions');
 
@@ -19629,6 +19629,73 @@ var AddToCart = React.createClass({displayName: "AddToCart",
 module.exports = AddToCart;
 
 },{"../actions/app-actions":162,"react":161}],164:[function(require,module,exports){
+var React           = require("react"),
+    Appstore        = require("../stores/app-stores"),
+    IncreaseItem    = require("./app-increaseitem"),
+    DecreaseItem    = require("./app-decreaseitem"),
+    RemoveFromCart  = require("./app-removefromcart");
+
+
+function cartItems(){
+    return {items: Appstore.getCart()}
+}
+
+var Cart  = React.createClass({displayName: "Cart",
+    getInitialState : function(){
+        return cartItems();
+    },
+    componentWillMount : function() {
+        Appstore.addChangeListener(this._onChange)
+    },
+    _onChange : function() {
+        this.setState(cartItems());
+    },
+    render : function(){
+        var total = 0;
+        var items = this.state.items.map(function(item, i){
+            var subtotal = item.cost * item.qty;
+            total += subtotal;
+            return(
+                React.createElement("tr", {key: i}, 
+                    React.createElement("td", null, React.createElement(RemoveFromCart, {index: i})), 
+                    React.createElement("td", null, item.title), 
+                    React.createElement("td", null, item.qty), 
+                    React.createElement("td", null, 
+                        React.createElement(IncreaseItem, {index: i}), 
+                        React.createElement(DecreaseItem, {index: i})
+                    ), 
+                    React.createElement("td", null, subtotal)
+                )
+            );
+        })
+        return (
+            React.createElement("table", {className: "table table-hover boostrapisntlinkedhere"}, 
+                React.createElement("thead", null, 
+                    React.createElement("tr", null, 
+                        React.createElement("th", null), 
+                        React.createElement("th", null, "Item"), 
+                        React.createElement("th", null, "Qty"), 
+                        React.createElement("th", null), 
+                        React.createElement("th", null, "Subtotal")
+                    )
+                ), 
+                React.createElement("tbody", null, 
+                    items
+                ), 
+                React.createElement("tfoot", null, 
+                    React.createElement("tr", null, 
+                        React.createElement("td", null, "Total"), 
+                        React.createElement("td", null, total)
+                    )
+                )
+            )
+        )
+    }
+});
+
+module.exports = Cart;
+
+},{"../stores/app-stores":173,"./app-decreaseitem":166,"./app-increaseitem":167,"./app-removefromcart":168,"react":161}],165:[function(require,module,exports){
 var React = require('react');
 var AppStore = require('../stores/app-stores');
 var AddToCart = require('./app-addtocart');
@@ -19661,9 +19728,55 @@ var Catalog = React.createClass({displayName: "Catalog",
 
 module.exports = Catalog;
 
-},{"../stores/app-stores":169,"./app-addtocart":163,"react":161}],165:[function(require,module,exports){
+},{"../stores/app-stores":173,"./app-addtocart":163,"react":161}],166:[function(require,module,exports){
 var React = require('react');
-var Catalog = require('./app-catalog');
+var AppActions = require('../actions/app-actions');
+
+var DecreaseItem = React.createClass({displayName: "DecreaseItem",
+    handler: function(){
+        AppActions.decreaseItem(this.props.index)
+    },
+    render : function(){
+        return React.createElement("button", {onClick: this.handler}, "-")
+    }
+});
+
+module.exports = DecreaseItem;
+
+},{"../actions/app-actions":162,"react":161}],167:[function(require,module,exports){
+var React = require('react');
+var AppActions = require('../actions/app-actions');
+
+var IncreaseItem = React.createClass({displayName: "IncreaseItem",
+    handler :  function(){
+        AppActions.increaseItem(this.props.index);
+    },
+    render : function(){
+        return React.createElement("button", {onClick: this.handler}, "+")
+    }
+});
+
+module.exports = IncreaseItem;
+
+},{"../actions/app-actions":162,"react":161}],168:[function(require,module,exports){
+var React = require('react');
+var AppActions = require('../actions/app-actions');
+
+var RemoveFromCart = React.createClass({displayName: "RemoveFromCart",
+    handler : function(){
+        AppActions.removeItem(this.props.index);
+    },
+    render : function(){
+        return React.createElement("button", {onClick: this.handler}, "Remove Item");
+    }
+});
+
+module.exports =  RemoveFromCart;
+
+},{"../actions/app-actions":162,"react":161}],169:[function(require,module,exports){
+var React       = require('react'),
+    Catalog     = require('./app-catalog'),
+    Cart        = require('./app-cart');
 
 var App = React.createClass({displayName: "App",
 	render : function(){
@@ -19671,8 +19784,7 @@ var App = React.createClass({displayName: "App",
             React.createElement("div", null, 
                 React.createElement("h1", null, "Shopping"), 
                 React.createElement(Catalog, null), 
-                React.createElement("p", null, "Cart"), 
-                React.createElement("h1", null, "xfasdf"), 
+                React.createElement("h1", null, "Cart"), 
                 React.createElement(Cart, null)
             )
         );
@@ -19681,14 +19793,14 @@ var App = React.createClass({displayName: "App",
 
 module.exports = App;
 
-},{"./app-catalog":164,"react":161}],166:[function(require,module,exports){
+},{"./app-cart":164,"./app-catalog":165,"react":161}],170:[function(require,module,exports){
 module.exports = {
 	ADD_ITEM: 'ADD_ITEM',
 	REMOVE_ITEM: 'REMOVE_ITEM',
 	INCREASE_ITEM: 'INCREASE_ITEM',
 	DECREASE_ITEM: 'DECREASE_ITEM'
 };
-},{}],167:[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign');
 
@@ -19704,7 +19816,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":29,"react/lib/Object.assign":55}],168:[function(require,module,exports){
+},{"flux":29,"react/lib/Object.assign":55}],172:[function(require,module,exports){
 var App = require('./components/app');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -19713,7 +19825,7 @@ ReactDOM.render(
     React.createElement(App, null), document.getElementById('main')
 );
 
-},{"./components/app":165,"react":161,"react-dom":33}],169:[function(require,module,exports){
+},{"./components/app":169,"react":161,"react-dom":33}],173:[function(require,module,exports){
 var AppDispatcher = require('../dispatchers/app-dispatcher');
 var AppConstants = require('../constants/app-constants');
 var assign = require('react/lib/Object.assign');
@@ -19819,4 +19931,4 @@ var AppStore = assign(EventEmitter.prototype, {
 
 module.exports = AppStore;
 
-},{"../constants/app-constants":166,"../dispatchers/app-dispatcher":167,"events":1,"react/lib/Object.assign":55}]},{},[168]);
+},{"../constants/app-constants":170,"../dispatchers/app-dispatcher":171,"events":1,"react/lib/Object.assign":55}]},{},[172]);

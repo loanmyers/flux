@@ -1,5 +1,6 @@
-var React = require('react');
-var Catalog = require('./app-catalog');
+var React       = require('react'),
+    Catalog     = require('./app-catalog'),
+    Cart        = require('./app-cart');
 
 var App = React.createClass({
 	render : function(){
@@ -7,8 +8,7 @@ var App = React.createClass({
             <div>
                 <h1>Shopping</h1>
                 <Catalog />
-                <p>Cart</p>
-                <h1>xfasdf</h1>
+                <h1>Cart</h1>
                 <Cart />
             </div>
         );
