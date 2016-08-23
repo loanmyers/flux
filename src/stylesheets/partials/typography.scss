@@ -1,0 +1,13 @@
+$light: 100;
+$uom: 0.625em; /* normalise text from 16px to 10px */
+$font: 'Helvetica';
+$major: null;
+$minor: null;
+$primary: #954121;
+
+body {
+  font-family: $font;
+  font-size: $uom;
+  font-weight: $light;
+  color: $primary;
+}
